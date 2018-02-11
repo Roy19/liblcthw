@@ -1,0 +1,5 @@
+build/
+bin/
+src/*.o
+tests/*_test
+tags
