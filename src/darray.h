@@ -41,6 +41,7 @@ error:
 	return;
 }
 static inline void *DArray_get(DArray *array,int i){
+	check(array != NULL,"Invalid array pointer.");
 	check(i < array->max,"darray attempt to get past max.");
 
 	return array->contents[i];
@@ -48,13 +49,18 @@ error:
 	return NULL;
 }
 static inline void *DArray_remove(DArray *array,int i){
+	check(array != NULL, "Invalid array pointer.");
+	check(array->contents != NULL,"DArray is empty.");
 	void *el = array->contents[i];
 
 	array->contents[i] = NULL;
 
 	return el;
+error:
+	return NULL;
 }
 static inline void *DArray_new(DArray *array){
+	check(array != NULL,"Invalid array pointer.");
 	check(array->element_size > 0,"Can't use DArray_new on 0 size darrays.");
 	return calloc(1,array->element_size);
 

@@ -27,6 +27,8 @@ error:
 }
 void DArray_clear(DArray *array){
 	int i = 0;
+	check(array != NULL,"Invalid array pointer.");
+
 	if(array->element_size > 0){
 		for(i = 0;i < array->max;i++){
 			if(array->contents[i] != NULL){
@@ -34,8 +36,12 @@ void DArray_clear(DArray *array){
 			}
 		}
 	}
+error:
+	return;
 }
 static inline int DArray_resize(DArray *array,size_t newsize){
+	check(array != NULL,"Invalid array pointer.");
+
 	array->max = newsize;
 	check(array->max > 0,"Newsize must be greater than 0.");
 
@@ -49,6 +55,7 @@ error:
 	return -1;
 }
 int DArray_expand(DArray *array){
+	check(array != NULL,"Invalid array pointer.");
 	size_t oldmax = array->max;
 	check(DArray_resize(array,array->max+array->expand_rate) == 0,"Failed to expand array to new size:%d",oldmax+(int)array->expand_rate);
 
@@ -59,9 +66,12 @@ error:
 	return -1;
 }
 int DArray_contract(DArray *array){
+	check(array != NULL,"Invalid array pointer.");
 	int newsize = array->end < (int)array->expand_rate?(int)array->expand_rate:array->end;
 
 	return DArray_resize(array,newsize+1);
+error:
+	return -1;
 }
 void DArray_destroy(DArray *array){
 	if(array){
@@ -76,6 +86,9 @@ void DArray_clear_destroy(DArray *array){
 	DArray_destroy(array);
 }
 int DArray_push(DArray *array,void *el){
+	check(array != NULL,"Invalid array pointer.");
+	check(array->contents != NULL,"Invalid contents in array.");
+
 	array->contents[array->end] = el;
 	array->end++;
 
@@ -84,8 +97,11 @@ int DArray_push(DArray *array,void *el){
 	}else{
 		return 0;
 	}
+error:
+	return -1;
 }
 void *DArray_pop(DArray *array){
+	check(array != NULL,"Invalid array pointer.");
 	check(array->end-1 >= 0,"Attempt to pop from empty array.");
 	
 	void *el = DArray_remove(array,array->end-1);
