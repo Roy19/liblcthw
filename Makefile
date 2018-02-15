@@ -1,5 +1,6 @@
-CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
-LDFLAGS=$(OPTLIBS)
+CFLAGS=-g -O2 -Wall -Wextra -Isrc $(shell pkg-config --cflags libbsd) -rdynamic -DNDEBUG $(OPTFLAGS)
+COMMON_LIBS=$(shell pkg-config --libs libbsd) -ldl $(OPTLIBS)
+LDLIBS=$(COMMON_LIBS)
 PREFIX?=/usr/local
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
