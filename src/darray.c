@@ -59,7 +59,7 @@ int DArray_expand(DArray *array){
 	size_t oldmax = array->max;
 	check(DArray_resize(array,array->max+array->expand_rate) == 0,"Failed to expand array to new size:%d",oldmax+(int)array->expand_rate);
 
-	memset(array->contents+oldmax,0,array->expand_rate+1);
+	memset(array->contents+oldmax,0,array->expand_rate);
 
 	return 0;
 error:
@@ -114,4 +114,12 @@ void *DArray_pop(DArray *array){
 error:
 	return NULL;
 }
+/*static int compare(void *a,void *b){
+	if((*(int *)a) > (*(int *)b))
+		return 1;
+	else if((*(int *)a) < (*(int *)b))
+		return -1;
+	else 
+		return 0;
+}*/
 
