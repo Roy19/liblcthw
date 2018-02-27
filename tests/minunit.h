@@ -3,11 +3,11 @@
 #define _minunit_h
 
 #include <stdio.h>
-#include "dbg.h"
+#include <dbg.h>
 #include <stdlib.h>
 
 #define mu_suite_start()    char *message = NULL;\
-                            tests_run = 0;
+				tests_run = 0;
 
 #define mu_assert(test,message) if(!(test)){\
                         log_err(message);return message;}
