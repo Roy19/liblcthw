@@ -5,13 +5,13 @@
 #include <dbg.h>
 
 RadixMap *RadixMap_create(size_t max){
-    RadixMap *map = calloc(sizeof(RadixMap), 1);
+    RadixMap *map = calloc(1,sizeof(RadixMap));
     check_mem(map);
 
-    map->contents = calloc(sizeof(RMElement), max + 1);
+    map->contents = calloc(max+1,sizeof(RMElement));
     check_mem(map->contents);
 
-    map->temp = calloc(sizeof(RMElement), max + 1);
+    map->temp = calloc(max+1,sizeof(RMElement));
     check_mem(map->temp);
 
     map->max = max;
@@ -19,6 +19,7 @@ RadixMap *RadixMap_create(size_t max){
 
     return map;
 error:
+    if(map) RadixMap_destroy(map);
     return NULL;
 }
 
@@ -41,13 +42,14 @@ static inline void radix_sort(short offset, uint64_t max,
     uint64_t s = 0;
     uint64_t c = 0;
 
-    // count occurences of every byte value
+    // count occurences of value (for the entire input array)
+    // given at a specific offset
     for (sp = source, end = source + max; sp < end; sp++) {
         count[ByteOf(sp, offset)]++;
     }
 
     // transform count into index by summing
-    // elements and storing into same array
+    // elements and storing into same array (much alike counting sort)
     for (s = 0, cp = count, end = count + 256; cp < end; cp++) {
         c = *cp;
         *cp = s;
