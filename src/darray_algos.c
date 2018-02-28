@@ -39,7 +39,32 @@
 		}
 	}
 	int DArray_qsort(DArray *array,DArray_compare cmp){
+		check(array != NULL,"Invalid array pointers specified.");
+		check(array->contents != NULL,"Invalid array contents.");
+
 		quick_sort(array->contents,0,DArray_count(array)-1,cmp);
 		return 0;
+	error:
+		return 1;
+	}
+
+	int DArray_search(DArray *array,DArray_compare cmp,void *to_find){
+		check(array != NULL,"Invalid array pointer.");
+		check(array->contents != NULL, "Invalid contents pointer.");
+
+		int low = 0,high = DArray_count(array)-1;
+
+		while(low <= high){
+			int middle = low + (high-low)/2;
+
+			if(cmp(&array->contents[middle],&to_find) == 0)
+				return middle;
+			else if(cmp(&array->contents[middle],&to_find) > 0)
+				high = middle - 1;
+			else
+				low = middle + 1;
+		}
+	error:	// fall through
+		return -1;
 	}
 #endif
