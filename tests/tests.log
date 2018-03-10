@@ -84,3 +84,302 @@ Tests run: 6
 RUNNING: ./tests/radixmap_test
 FAILED: Failed to properly sort the RadixMap.
 Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+FAILED: Failed to destroy bstring 1
+Tests run: 2
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 1
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 4
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 4
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+FAILED: Could not destroy bstring 2
+Tests run: 5
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+FAILED: Bstring 1 contents is not as specified
+Tests run: 6
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+bstr1->data = This is a bstrlib test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
