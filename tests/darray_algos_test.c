@@ -61,17 +61,18 @@ char *test_qsort(){
 }
 /*char *test_heapsort(){
 	return run_sort_test(DArray_heapsort,"heapsort");
-}
+}*/
 char *test_mergesort(){
 	return run_sort_test(DArray_mergesort,"mergesort");
-}*/
+}
 char *all_tests(){
 	mu_suite_start();
 
 	mu_run_test(test_qsort);
-	mu_run_test(run_search_test);
 	//mu_run_test(test_heapsort);
-	//mu_run_test(test_mergesort);
+	mu_run_test(test_mergesort);
+
+	mu_run_test(run_search_test);
 	
 	return NULL;
 }
