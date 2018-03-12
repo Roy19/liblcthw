@@ -5,7 +5,8 @@
 
 char *str1 = "Hello world";
 char *str2 = "This is a bstrlib test";
-bstring bstr1,bstr2,bstr3;
+bstring bstr1,bstr2;
+struct bstrList *blist;
 
 char *test_bfromcstr(){
 	bstr1 = bfromcstr(str1);
@@ -114,12 +115,21 @@ char *test_binstr(){
 	bdestroy(bstr2);
 	return NULL;
 }
-char *test_split(){
+char *test_bsplit(){
+	bstr2 = bfromcstr(str2);
+	int i = 0;	
+	mu_assert((blist = bsplit(bstr1,'b')),"Could not split the bstring into a bstrList");
+	for(i = 0;i < blist->qty;i++){
+		debug("blist->entry[%d]->data = %s\n",i,blist->entry[i]->data);
+	}
+	mu_assert(bstrListDestroy(blist) == BSTR_OK,"Could not destroy blist");
+	bdestroy(bstr2);
+	return NULL;	
 
 }
-char *test_format(){
+/*char *test_bformat(){
 
-}
+}*/
 char *test_accessorMacros(){
 	bstr1 = bfromcstr(str1);
 	char c;
@@ -149,8 +159,8 @@ char *all_tests(){
 	mu_run_test(test_bstricmp);
 	mu_run_test(test_binstr);
 	mu_run_test(test_accessorMacros);
-	mu_run_test(test_split);
-	mu_run_test(test_format);
+	mu_run_test(test_bsplit);
+	//mu_run_test(test_format);
 }
 RUN_TESTS(all_tests);
 
