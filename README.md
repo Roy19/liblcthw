@@ -5,6 +5,7 @@ Not yet complete.
 ### Data Structures supported:
 * [x] Doubly Linked Lists
 * [x] Dynamic Arrays
+* [x] HashMaps
 * [ ] Stacks
 * [ ] Queues and Ringbuffer 
 * [ ] Binary Search Trees 
