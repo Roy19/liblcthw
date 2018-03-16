@@ -782,3 +782,123 @@ Tests run: 6
 RUNNING: ./tests/radixmap_test
 FAILED: Failed to properly sort the RadixMap.
 Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 12
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/hashmap_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 12
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/hashmap_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 12
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/hashmap_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
+----
+RUNNING: ./tests/bstr_test
+ALL TESTS PASSED
+Tests run: 12
+----
+RUNNING: ./tests/darray_algos_test
+ALL TESTS PASSED
+Tests run: 3
+----
+RUNNING: ./tests/darray_test
+ALL TESTS PASSED
+Tests run: 8
+----
+RUNNING: ./tests/hashmap_test
+ALL TESTS PASSED
+Tests run: 5
+----
+RUNNING: ./tests/list_algos_test
+1234->7895->NDSS->XXXX->abcd->xjvef->
+1234->7895->NDSS->XXXX->abcd->xjvef->
+ALL TESTS PASSED
+Tests run: 2
+----
+RUNNING: ./tests/list_test
+ALL TESTS PASSED
+Tests run: 6
+----
+RUNNING: ./tests/radixmap_test
+FAILED: Failed to properly sort the RadixMap.
+Tests run: 1
