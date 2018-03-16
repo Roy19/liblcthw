@@ -39,8 +39,8 @@ Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash){
     map->hash = (hash == NULL) ? default_hash : hash;
     map->buckets = DArray_create(
             sizeof(DArray *), DEFAULT_NUMBER_OF_BUCKETS);
-    map->buckets->end = map->buckets->max;	// fake out expanding it
     check_mem(map->buckets);
+    map->buckets->end = map->buckets->max;	// fake out expanding it
 
     return map;
 
@@ -92,9 +92,10 @@ error:
     1 > create a new bucket
     0 > don't create a new bucket
 */
-static inline DArray *Hashmap_find_bucket(Hashmap * map, void *key,
+static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key,
         int create,
-        uint32_t * hash_out){
+        uint32_t *hash_out){
+    check(map != NULL,"Invalid map specified.")
     uint32_t hash = map->hash(key);
     int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;
     check(bucket_n >= 0, "Invalid bucket found: %d", bucket_n);
@@ -138,6 +139,9 @@ static inline int Hashmap_get_node(Hashmap * map, uint32_t hash,
         DArray * bucket, void *key){
     int i = 0;
 
+    check(map != NULL,"Invalid map given.");
+    check(bucket != NULL,"Invalid bucket given");
+    
     for (i = 0; i < DArray_end(bucket); i++) {
         debug("TRY: %d", i);
         HashmapNode *node = DArray_get(bucket, i);
@@ -145,6 +149,7 @@ static inline int Hashmap_get_node(Hashmap * map, uint32_t hash,
             return i;
         }
     }
+error:	// fall through
 
     return -1;
 }
@@ -171,6 +176,9 @@ int Hashmap_traverse(Hashmap * map, Hashmap_traverse_cb traverse_cb){
     int i = 0;
     int j = 0;
     int rc = 0;
+	
+    check(map != NULL,"Invalid map given.");
+    check(map->buckets != NULL,"Invalid buckets provided.");
 
     for (i = 0; i < DArray_count(map->buckets); i++) {
         DArray *bucket = DArray_get(map->buckets, i);
@@ -183,8 +191,9 @@ int Hashmap_traverse(Hashmap * map, Hashmap_traverse_cb traverse_cb){
             }
         }
     }
-
     return 0;
+error: // fall through
+    return -1;
 }
 
 void *Hashmap_delete(Hashmap * map, void *key){
