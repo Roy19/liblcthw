@@ -129,6 +129,7 @@ int Hashmap_set(Hashmap * map, void *key, void *data){
     check_mem(node);
 
     DArray_push(bucket, node);
+    DArray_mergesort(bucket,map->compare);
 
     return 0;
 

@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <darray.h>
+#include <darray_algos.h>
 
 #define DEFAULT_NUMBER_OF_BUCKETS 100
 
