@@ -31,14 +31,15 @@ static uint32_t default_hash(void *a){
     return hash;
 }
 
-Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash){
+Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash,size_t nbuckets){
     Hashmap *map = calloc(1, sizeof(Hashmap));
     check_mem(map);
 
     map->compare = (compare == NULL) ? default_compare : compare;
     map->hash = (hash == NULL) ? default_hash : hash;
+    map->nbuckets = (nbuckets == 0)?DEFAULT_NUMBER_OF_BUCKETS:nbuckets;
     map->buckets = DArray_create(
-            sizeof(DArray *), DEFAULT_NUMBER_OF_BUCKETS);
+            sizeof(DArray *), map->nbuckets);
     check_mem(map->buckets);
     map->buckets->end = map->buckets->max;	// fake out expanding it
 
