@@ -30,8 +30,15 @@ static int traverse_fail_cb(HashmapNode * node){
 }
 
 char *test_create(){
-    map = Hashmap_create(NULL, NULL);
+    map = Hashmap_create(NULL,NULL,50);
+    mu_assert(map != NULL,"Failed to create map");
+    mu_assert(map->nbuckets == 50,"Number of buckets should equal 50");
+
+    Hashmap_destroy(map);
+    
+    map = Hashmap_create(NULL, NULL,0);
     mu_assert(map != NULL, "Failed to create map.");
+    mu_assert(map->nbuckets == DEFAULT_NUMBER_OF_BUCKETS,"Number of buckets should equal to DEFAULT_NUMBER_OF_BUCKETS");
 
     return NULL;
 }
