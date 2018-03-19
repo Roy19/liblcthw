@@ -7,19 +7,19 @@ Hashmap *map = NULL;
 static int traverse_called = 0;
 struct tagbstring test1 = bsStatic("test data 1");
 struct tagbstring test2 = bsStatic("test data 2");
-struct tagbstring test3 = bsStatic("xest data 3");
+struct tagbstring test3 = bsStatic("test data 3");
 struct tagbstring expect1 = bsStatic("THE VALUE 1");
 struct tagbstring expect2 = bsStatic("THE VALUE 2");
 struct tagbstring expect3 = bsStatic("THE VALUE 3");
 
 static int traverse_good_cb(HashmapNode * node){
-    debug("KEY: %s", bdata((bstring) node->key));
+    debug("KEY: %s , DATA: %s", bdata((bstring) node->key), bdata((bstring) node->data));
     traverse_called++;
     return 0;
 }
 
 static int traverse_fail_cb(HashmapNode * node){
-    debug("KEY: %s", bdata((bstring) node->key));
+    debug("KEY: %s, DATA: %s", bdata((bstring) node->key), bdata((bstring) node->data));
     traverse_called++;
 
     if (traverse_called == 2) {
@@ -30,15 +30,15 @@ static int traverse_fail_cb(HashmapNode * node){
 }
 
 char *test_create(){
-    map = Hashmap_create(NULL,NULL,50);
-    mu_assert(map != NULL,"Failed to create map");
-    mu_assert(map->nbuckets == 50,"Number of buckets should equal 50");
-
-    Hashmap_destroy(map);
-    
     map = Hashmap_create(NULL, NULL,0);
     mu_assert(map != NULL, "Failed to create map.");
     mu_assert(map->nbuckets == DEFAULT_NUMBER_OF_BUCKETS,"Number of buckets should equal to DEFAULT_NUMBER_OF_BUCKETS");
+
+    Hashmap_destroy(map);
+
+    map = Hashmap_create(NULL,NULL,50);
+    mu_assert(map != NULL,"Failed to create map");
+    mu_assert(map->nbuckets == 50,"Number of buckets should equal 50");
 
     return NULL;
 }
@@ -48,7 +48,20 @@ char *test_destroy(){
 
     return NULL;
 }
+char *test_same_key(){
+    int rc = 0,i;
+    rc = Hashmap_set(map,&test1,&expect3);
+    mu_assert(rc == 0,"Failed to set &expect3");
+    rc = Hashmap_set(map,&test1,&expect2);
+    mu_assert(rc == 0,"Failed to set &expect2");
 
+    uint32_t hash = map->hash(&test1);
+    int bucket_n = hash % map->nbuckets;
+    DArray *bucket = DArray_get(map->buckets,bucket_n);
+    mu_assert(DArray_count(bucket) == 3,"Failed to assign different values to same key");
+    
+    return NULL;
+}
 char *test_get_set(){
     int rc = Hashmap_set(map, &test1, &expect1);
     mu_assert(rc == 0, "Failed to set &test1");
@@ -71,7 +84,7 @@ char *test_get_set(){
 char *test_traverse(){
     int rc = Hashmap_traverse(map, traverse_good_cb);
     mu_assert(rc == 0, "Failed to traverse.");
-    mu_assert(traverse_called == 3, "Wrong count traverse.");
+    mu_assert(traverse_called == 5, "Wrong count traverse.");
 
     traverse_called = 0;
     rc = Hashmap_traverse(map, traverse_fail_cb);
@@ -108,6 +121,7 @@ char *all_tests(){
 
     mu_run_test(test_create);
     mu_run_test(test_get_set);
+    mu_run_test(test_same_key);
     mu_run_test(test_traverse);
     mu_run_test(test_delete);
     mu_run_test(test_destroy);
