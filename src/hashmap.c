@@ -4,6 +4,9 @@
 #include <dbg.h>
 #include <bstrlib.h>
 
+static int compare_data(HashmapNode *a,HashmapNode *b){
+    return bstrcmp((bstring) a->data,(bstring) b->data);
+}
 static int default_compare(void *a, void *b){
     return bstrcmp((bstring) a, (bstring) b);
 }
@@ -98,7 +101,7 @@ static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key,
         uint32_t *hash_out){
     check(map != NULL,"Invalid map specified.")
     uint32_t hash = map->hash(key);
-    int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;
+    int bucket_n = hash % map->nbuckets;
     check(bucket_n >= 0, "Invalid bucket found: %d", bucket_n);
     // store it for the return so the caller can use it
     *hash_out = hash;
@@ -109,7 +112,7 @@ static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key,
     if (!bucket && create) {
         // new bucket, set it up
         bucket = DArray_create(
-                sizeof(void *), DEFAULT_NUMBER_OF_BUCKETS);
+                sizeof(void *), map->nbuckets);
         check_mem(bucket);
         DArray_set(map->buckets, bucket_n, bucket);
     }
@@ -129,7 +132,8 @@ int Hashmap_set(Hashmap * map, void *key, void *data){
     check_mem(node);
 
     DArray_push(bucket, node);
-    DArray_mergesort(bucket,map->compare);
+    int rc = DArray_mergesort(bucket,compare_data);
+    check(rc == 0,"Failed to sort the bucket");
 
     return 0;
 
