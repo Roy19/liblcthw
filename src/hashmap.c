@@ -4,9 +4,10 @@
 #include <dbg.h>
 #include <bstrlib.h>
 
-static int compare_data(HashmapNode *a,HashmapNode *b){
-    return bstrcmp((bstring) a->data,(bstring) b->data);
+static int compare_data(HashmapNode **a,HashmapNode **b){
+    return bstrcmp((bstring) (*a)->data,(bstring) (*b)->data);
 }
+
 static int default_compare(void *a, void *b){
     return bstrcmp((bstring) a, (bstring) b);
 }
@@ -99,7 +100,7 @@ error:
 static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key,
         int create,
         uint32_t *hash_out){
-    check(map != NULL,"Invalid map specified.")
+    check(map != NULL,"Invalid map specified.");
     uint32_t hash = map->hash(key);
     int bucket_n = hash % map->nbuckets;
     check(bucket_n >= 0, "Invalid bucket found: %d", bucket_n);
@@ -132,6 +133,7 @@ int Hashmap_set(Hashmap * map, void *key, void *data){
     check_mem(node);
 
     DArray_push(bucket, node);
+    
     int rc = DArray_mergesort(bucket,compare_data);
     check(rc == 0,"Failed to sort the bucket");
 
