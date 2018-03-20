@@ -5,6 +5,7 @@
 #include <bstrlib.h>
 
 static int compare_data(HashmapNode **a,HashmapNode **b){
+	// Comparision based on value of the key it's associated with
     return bstrcmp((bstring) (*a)->data,(bstring) (*b)->data);
 }
 
