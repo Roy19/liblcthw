@@ -13,9 +13,9 @@ typedef struct StringScanner{
 	size_t skip_chars[UCHAR_MAX+1];
 }StringScanner;
 
-int String_find(bstring in,bstring what);
+ssize_t String_find(bstring in,bstring what);
 StringScanner *StringScanner_create(bstring in);
-int StringScanner_scan(StringScanner * scan,bstring tofind);
+ssize_t StringScanner_scan(StringScanner * scan,bstring tofind);
 void StringScanner_destroy(StringScanner * scan);
 
 #endif

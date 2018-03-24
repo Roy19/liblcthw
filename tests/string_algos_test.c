@@ -12,10 +12,10 @@ char *test_find_and_scan(){
     StringScanner *scan = StringScanner_create(&IN_STR);
     mu_assert(scan != NULL, "Failed to make the scanner.");
 
-    int find_i = String_find(&IN_STR, &ALPHA);
+    ssize_t find_i = String_find(&IN_STR, &ALPHA);
     mu_assert(find_i > 0, "Failed to find 'ALPHA' in test string.");
 
-    int scan_i = StringScanner_scan(scan, &ALPHA);
+    ssize_t scan_i = StringScanner_scan(scan, &ALPHA);
     mu_assert(scan_i > 0, "Failed to find 'ALPHA' with scan.");
     mu_assert(scan_i == find_i, "find and scan don't match");
 
@@ -59,7 +59,7 @@ char *test_binstr_performance(){
 
 char *test_find_performance(){
     int i = 0;
-    int found_at = 0;
+    ssize_t found_at = 0;
     unsigned long find_count = 0;
     time_t elapsed = 0;
     time_t start = time(NULL);
@@ -81,7 +81,7 @@ char *test_find_performance(){
 
 char *test_scan_performance(){
     int i = 0;
-    int found_at = 0;
+    ssize_t found_at = 0;
     unsigned long find_count = 0;
     time_t elapsed = 0;
     StringScanner *scan = StringScanner_create(&IN_STR);

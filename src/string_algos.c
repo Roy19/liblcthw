@@ -1,10 +1,15 @@
 #include <string_algos.h>
 #include <limits.h>
+#include <dbg.h>
 
 static inline void String_setup_skip_chars(size_t * skip_chars,
         const unsigned char *needle,
         ssize_t nlen){
     size_t i = 0;
+
+    assert(needle != NULL && "Invalid needle string provided.");
+    assert(nlen > 0 && "Needle string cannot have length <= 0.");
+    
     size_t last = nlen - 1;
 
     for (i = 0; i < UCHAR_MAX + 1; i++) {
@@ -29,6 +34,7 @@ static inline const unsigned char *String_base_search(const unsigned
 
     assert(haystack != NULL && "Given bad haystack to search.");
     assert(needle != NULL && "Given bad needle to search for.");
+    assert(skip_chars != NULL && "Given bad skip_chars list for search.");
 
     check(nlen > 0, "nlen can't be <= 0");
     check(hlen > 0, "hlen can't be <= 0");
@@ -48,8 +54,11 @@ error:			// fallthrough
     return NULL;
 }
 
-int String_find(bstring in, bstring what){
+ssize_t String_find(bstring in, bstring what){
     const unsigned char *found = NULL;
+
+    check(in != NULL,"Invalid haystack string.");
+    check(what != NULL,"Invalid needle string.");
 
     const unsigned char *haystack = (const unsigned char *)bdata(in);
     ssize_t hlen = blength(in);
@@ -62,13 +71,16 @@ int String_find(bstring in, bstring what){
     found = String_base_search(haystack, hlen,
                  needle, nlen, skip_chars);
 
-    return found != NULL ? found - haystack : -1;
+    return found != NULL ? (ssize_t) (found - haystack) : -1;
+error:
+    return -1;
 }
 
 StringScanner *StringScanner_create(bstring in){
     StringScanner *scan = calloc(1, sizeof(StringScanner));
     check_mem(scan);
 
+    check(in != NULL,"Input string is invalid.");
     scan->in = in;
     scan->haystack = (const unsigned char *)bdata(in);
     scan->hlen = blength(in);
@@ -83,6 +95,8 @@ error:
 
 static inline void StringScanner_set_needle(StringScanner * scan,
         bstring tofind){
+    assert(scan != NULL && "Invalid scan given to StringScanner_set_needle.");
+
     scan->needle = (const unsigned char *)bdata(tofind);
     scan->nlen = blength(tofind);
 
@@ -90,13 +104,19 @@ static inline void StringScanner_set_needle(StringScanner * scan,
 }
 
 static inline void StringScanner_reset(StringScanner * scan){
+    assert(scan != NULL && "Invalid scan given to StringScanner_reset.");
+    assert(scan->in != NULL && "No in string set in StringScanner * scan.");
+
     scan->haystack = (const unsigned char *)bdata(scan->in);
     scan->hlen = blength(scan->in);
 }
 
-int StringScanner_scan(StringScanner * scan, bstring tofind){
+ssize_t StringScanner_scan(StringScanner * scan, bstring tofind){
     const unsigned char *found = NULL;
     ssize_t found_at = 0;
+
+    assert(scan != NULL && "Invalid scan pointer given to StringScanner_scan.");
+    assert(tofind != NULL && "Given invalid string to search for.");
 
     if (scan->hlen <= 0) {
         StringScanner_reset(scan);
