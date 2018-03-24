@@ -13,5 +13,7 @@ Not yet complete.
 * [ ] Graphs 
 
 ### Algorithms supported:
-* Sorts on Doubly Linked List.
-* Search and sorts in Dynamic Arrays.
+* [x] Sorts on Doubly Linked List.
+* [x] Search and sorts in Dynamic Arrays.
+* [x] Non Cryptographic Hashes (about 4 of them).
+* [x] Boyer-Moore-Horspool String Search algorithm.
