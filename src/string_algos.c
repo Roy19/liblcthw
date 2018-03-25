@@ -80,7 +80,7 @@ StringScanner *StringScanner_create(bstring in){
     StringScanner *scan = calloc(1, sizeof(StringScanner));
     check_mem(scan);
 
-    check(in != NULL,"Input string is invalid.");
+    check(in != NULL,"Given input string is invalid.");
     scan->in = in;
     scan->haystack = (const unsigned char *)bdata(in);
     scan->hlen = blength(in);
@@ -96,6 +96,7 @@ error:
 static inline void StringScanner_set_needle(StringScanner * scan,
         bstring tofind){
     assert(scan != NULL && "Invalid scan given to StringScanner_set_needle.");
+    assert(tofind != NULL && "Invalid needle string given to needle string.");
 
     scan->needle = (const unsigned char *)bdata(tofind);
     scan->nlen = blength(tofind);
