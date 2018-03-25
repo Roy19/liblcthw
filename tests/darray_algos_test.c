@@ -2,12 +2,13 @@
 #include <darray_algos.h>
 #include <string.h>
 
+char *words[] = {"asdfasfd","werwar","13234","xyz","oioj"};	// test words for DArray
+
 int testcmp(char **a,char **b){
 	return strcmp(*a,*b);
 }
 DArray *create_words(){
 	DArray *result = DArray_create(0,5);
-	char *words[] = {"asdfasfd","werwar","13234","xyz","oioj"};
 	int i = 0;
 
 	for(i = 0; i < 5; i++){
@@ -46,7 +47,7 @@ char *run_search_test(){
 	char *test_finds[] = {"asdfasfd","xyz","oioj","ABCDEFD","DETerminant"};
 	for(i = 0;i < 5;i++){
 		debug("Searching for %s in DArray",test_finds[i]);
-		int rc = DArray_search(array,testcmp,test_finds[i]);
+		int rc = DArray_search(array,(DArray_compare) testcmp,test_finds[i]);
 		if(rc == -1){
 			debug("%s could not be found in the array",test_finds[i]);
 		}else{
