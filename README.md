@@ -8,7 +8,7 @@ Not yet complete.
 * [x] HashMaps
 * [ ] Stacks
 * [ ] Queues and Ringbuffer 
-* [ ] Binary Search Trees 
+* [x] Binary Search Trees 
 * [ ] Ternary Search Trees
 * [ ] Graphs 
 
