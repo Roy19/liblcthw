@@ -68,6 +68,8 @@ static inline void BSTree_setnode(BSTree * map, BSTreeNode * node,
 }
 
 int BSTree_set(BSTree * map, void *key, void *data){
+    check(map != NULL,"Invalid map.");
+    
     if (map->root == NULL) {
         // first so just make it and get out
         map->root = BSTreeNode_create(NULL, key, data);
@@ -103,12 +105,16 @@ static inline BSTreeNode *BSTree_getnode(BSTree * map,
 }
 
 void *BSTree_get(BSTree * map, void *key){
+    check(map != NULL,"Invalid map.");
+
     if (map->root == NULL) {
         return NULL;
     } else {
         BSTreeNode *node = BSTree_getnode(map, map->root, key);
         return (node == NULL) ? NULL : node->data;
     }
+error:
+    return NULL;
 }
 
 static inline int BSTree_traverse_nodes(BSTreeNode * node,
@@ -131,11 +137,14 @@ static inline int BSTree_traverse_nodes(BSTreeNode * node,
 }
 
 int BSTree_traverse(BSTree * map, BSTree_traverse_cb traverse_cb){
+    check(map != NULL,"Invalid map.");
+
     if (map->root) {
         return BSTree_traverse_nodes(map->root, traverse_cb);
     }
 
-    return 0;
+error:
+    return -1;
 }
 
 static inline BSTreeNode *BSTree_find_min(BSTreeNode * node){
@@ -220,6 +229,7 @@ static inline BSTreeNode *BSTree_node_delete(BSTree * map,
 }
 
 void *BSTree_delete(BSTree * map, void *key){
+    check(map != NULL,"Invalid map.");
     void *data = NULL;
 
     if (map->root) {
@@ -232,4 +242,7 @@ void *BSTree_delete(BSTree * map, void *key){
     }
 
     return data;
+
+error:
+    return NULL;
 }
