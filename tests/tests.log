@@ -3,6 +3,10 @@ RUNNING: ./tests/bstr_test
 ALL TESTS PASSED
 Tests run: 12
 ----
+RUNNING: ./tests/bstree_test
+ALL TESTS PASSED
+Tests run: 6
+----
 RUNNING: ./tests/darray_algos_test
 ALL TESTS PASSED
 Tests run: 3
