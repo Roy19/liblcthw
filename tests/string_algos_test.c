@@ -109,10 +109,27 @@ char *test_scan_performance(){
     return NULL;
 }
 
+char *test_KMP_algorithm(){
+	KMPStruct *s = create_KMPStruct(&IN_STR,&ALPHA);
+	mu_assert(s != NULL,"Failed to create KMPStruct.");
+
+	mu_assert(computeLPSArray(s) == 0,"Could not compute LPS Array.");
+	
+	int rc = KMPmatch(s,0,blength(&IN_STR));
+	mu_assert(rc == 7,"Invalid first match.");
+	rc = KMPmatch(s,rc+1,blength(&IN_STR));
+	mu_assert(rc == 18,"Invalid 2nd match.");
+	rc = KMPmatch(s,rc+1,blength(&IN_STR));
+	mu_assert(rc == 36,"Invalid 3rd match.");
+	
+	KMPStruct_destroy(s);
+}
+
 char *all_tests(){
     mu_suite_start();
 
     mu_run_test(test_find_and_scan);
+    mu_run_test(test_KMP_algorithm);
 
 #if 0
     mu_run_test(test_scan_performance);
