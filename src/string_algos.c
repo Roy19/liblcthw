@@ -1,4 +1,5 @@
 #include <string_algos.h>
+#include <assert.h>
 #include <limits.h>
 
 static inline void String_setup_skip_chars(size_t * skip_chars,
@@ -128,4 +129,83 @@ void StringScanner_destroy(StringScanner * scan){
     if (scan) {
         free(scan);
     }
+}
+
+KMPStruct *create_KMPStruct(bstring text,bstring pattern){
+	check(text != NULL,"Invalid text string.");
+	check(pattern != NULL,"Invalid pattern string.");
+
+	KMPStruct *k = calloc(1,sizeof(KMPStruct));
+	check_mem(k);
+	
+	k->text = text;
+	k->pattern = pattern;
+	
+	size_t *lps = calloc(blength(pattern),sizeof(size_t));
+	check_mem(lps);
+	k->lps = lps;
+	
+	return k;
+error:
+	KMPStruct_destroy(k);
+	return NULL;
+}
+
+void KMPStruct_destroy(KMPStruct *s){
+	if(s){
+		if(s->lps)
+			free(s->lps);
+		free(s);
+	}
+}
+
+int computeLPSArray(KMPStruct *s){
+	check(s != NULL,"Invalid KMP Structure.");
+	check(s->lps != NULL,"Invalid LPS Array.");
+
+	size_t len = 0;
+	int i = 1;
+	s->lps[0] = 0;
+
+	while(i < blength(s->pattern)){
+		if(bchar(s->pattern,i) == bchar(s->pattern,len)){
+			len++;
+			s->lps[i] = len;
+			i++;
+		}else{
+			if(len != 0){
+				len = s->lps[len-1];
+			}else{
+				s->lps[i] = 0;
+				i++;
+			}
+		}
+	}
+	return 0;
+error:
+	return -1;
+}
+int KMPmatch(KMPStruct *s,int start,int end){
+	assert(start < end && "Invalid start and end.");
+	check(s != NULL,"Invalid KMP Structure.");
+	check(s->pattern != NULL && s->text != NULL && s->lps != NULL,"Invalid text, pattern, lps_array.");
+
+	int i = start;	// Index for text
+	int j = 0;	// Index for the pattern
+	while(start < end){
+		if(bchar(s->pattern,j) == bchar(s->text,i)){
+			i++;
+			j++;
+		}
+		if(j == blength(s->pattern)){
+			return (i-j);
+		}else if((i < blength(s->text)) && (bchar(s->pattern,j) != bchar(s->text,i))){
+			if(j != 0)
+				j = s->lps[j-1];
+			else
+				i++;
+		}
+	}
+error:	// fall through
+	return -1;
 }

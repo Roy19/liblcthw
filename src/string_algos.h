@@ -18,5 +18,16 @@ StringScanner *StringScanner_create(bstring in);
 int StringScanner_scan(StringScanner * scan,bstring tofind);
 void StringScanner_destroy(StringScanner * scan);
 
+typedef struct KMPStruct{
+	bstring text;
+	bstring pattern;
+	size_t * lps;
+}KMPStruct;
+
+KMPStruct *create_KMPStruct(bstring text,bstring pattern);
+void KMPStruct_destroy(KMPStruct *s);
+int computeLPSArray(KMPStruct *s);
+int KMPmatch(KMPStruct *s,int start,int end);
+
 #endif
 
