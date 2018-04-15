@@ -17,3 +17,5 @@ Not yet complete.
 * [x] Search and sorts in Dynamic Arrays.
 * [x] Non Cryptographic Hashes (about 4 of them).
 * [x] Boyer-Moore-Horspool String Search algorithm.
+* [x] Knuth-Morris-Pratt String Searching algorithm.
+
