@@ -125,6 +125,33 @@ char *test_KMP_algorithm(){
 	KMPStruct_destroy(s);
 }
 
+char *test_KMP_performance(){
+	int found_at;
+	int i;
+	unsigned long int find_count = 0;
+	time_t elapsed = 0;
+	time_t start = time(NULL);
+
+	KMPStruct *s = create_KMPStruct(&IN_STR,&ALPHA);
+	mu_assert(s != NULL,"Failed to create KMP Structure for performance testing.");
+	mu_assert(computeLPSArray(s) == 0,"Failed to compute LPS Array for performance testing.");
+
+	do{
+		for(i = 0;i < 1000;i++){
+			found_at = KMPmatch(s,0,blength(&IN_STR));
+			find_count++;
+		}	
+		elapsed = time(NULL) - start;
+	
+	}while(elapsed <= TEST_TIME);
+	debug("FIND COUNT: %lu, END TIME: %d, OPS: %f",find_count,
+			(int)elapsed, (double)find_count / elapsed);
+
+	KMPStruct_destroy(s);
+
+	return NULL;
+}
+
 char *all_tests(){
     mu_suite_start();
 
@@ -135,6 +162,7 @@ char *all_tests(){
     mu_run_test(test_scan_performance);
     mu_run_test(test_find_performance);
     mu_run_test(test_binstr_performance);
+    mu_run_test(test_KMP_performance);
 #endif
 
     return NULL;
