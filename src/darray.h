@@ -6,8 +6,8 @@
 #include <dbg.h>
 
 typedef struct DArray{
-	int end;
-	int max;
+	int end;		// No. of elements in the DArray
+	int max;		// Maximum size of the DArray
 	size_t element_size;
 	size_t expand_rate;
 	void **contents;

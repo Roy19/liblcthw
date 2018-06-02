@@ -126,4 +126,52 @@
 	error:
 		return 1;
 	}
+	static void MaxHeapify(DArray *array,int i,DArray_compare cmp){
+		check(array != NULL && cmp != NULL,"Invalid array and compare pointer");
+		check(array->contents != NULL,"Invalid array contents");
+		check(i >= 0 && i <= array->end,"Value of i is out-of-bounds");
+		
+		int l = heap_left(i);
+		int r = heap_right(i);
+		int largest = i;
+
+		if(l < DArray_count(array) && cmp(&array->contents[l],&array->contents[i]) > 0)
+			largest = l;
+		if(r < DArray_count(array) && cmp(&array->contents[r],&array->contents[largest]) > 0)
+			largest = r;
+		if(largest != i){
+			swap(&array->contents[i],&array->contents[largest]);
+			MaxHeapify(array,largest,cmp);
+		}
+	error:
+		return;	
+	}
+	static void BuildMaxHeap(DArray *array,DArray_compare cmp){
+		check(array != NULL && cmp != NULL,"Invalid array and compare pointers");
+		check(array->contents != NULL,"Invalid array contents");
+
+		int i;
+		for(i = (DArray_count(array)-1)/2;i >= 0;i--)
+		       MaxHeapify(array,i,cmp);
+	error:
+		return;	
+	}
+	int DArray_heapsort(DArray *array,DArray_compare cmp){
+		check(array != NULL && cmp != NULL,"Invalid array and compare pointers");
+		check(array->contents != NULL,"Invalid array contents");
+		
+		int i;
+		size_t heapsize = DArray_count(array);
+				
+		BuildMaxHeap(array,cmp);
+		for(i = (DArray_count(array)-1);i >= 1;i--){
+			swap(&array->contents[0],&array->contents[i]);
+			array->end -= 1;
+			MaxHeapify(array,0,cmp);
+		}
+		array->end = heapsize;
+		return 0;
+	error:
+		return 1;
+	}
 #endif
