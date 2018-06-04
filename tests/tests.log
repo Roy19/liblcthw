@@ -45,6 +45,10 @@ RUNNING: ./tests/stack_test
 ALL TESTS PASSED
 Tests run: 3
 ----
+RUNNING: ./tests/stats_test
+ALL TESTS PASSED
+Tests run: 2
+----
 RUNNING: ./tests/string_algos_test
 ALL TESTS PASSED
 Tests run: 2
