@@ -33,9 +33,17 @@ RUNNING: ./tests/list_test
 ALL TESTS PASSED
 Tests run: 6
 ----
+RUNNING: ./tests/queue_test
+ALL TESTS PASSED
+Tests run: 3
+----
 RUNNING: ./tests/radixmap_test
 ALL TESTS PASSED
 Tests run: 1
+----
+RUNNING: ./tests/stack_test
+ALL TESTS PASSED
+Tests run: 3
 ----
 RUNNING: ./tests/string_algos_test
 ALL TESTS PASSED
