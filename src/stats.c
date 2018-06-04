@@ -1,7 +1,4 @@
-#include <math.h>
 #include <stats.h>
-#include <dbg.h>
-#include <stdlib.h>
 
 Stats *Stats_recreate(double sum,double sumsq,unsigned long n,double min,
                 double max){
@@ -20,22 +17,6 @@ error:
 }
 Stats *Stats_create(){
         return Stats_recreate(0.0,0.0,0L,0.0,0.0);
-}
-double Stats_mean(Stats *st){
-        check(st != NULL,"Invalid Stats pointer given to mean().");
-        check(st->n != 0,"n cannot be 0");
-
-        return (st->sum / st->n);
-error:
-        return 0.0;
-}
-double Stats_stddev(Stats *st){
-        check(st != NULL,"Invalid Stats pointer given to stddev().");
-        check(st->n != 0,"n cannot be 0");
-
-        return sqrt((st->sumsq - (st->sum*st->sum/st->n))/(st->n-1));
-error:
-        return 0.0;
 }
 void Stats_sample(Stats *st,double s){
         check(st != NULL,"Invalid Stats pointer given to sample().");
