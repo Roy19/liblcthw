@@ -6,8 +6,8 @@ Not yet complete.
 * [x] Doubly Linked Lists
 * [x] Dynamic Arrays
 * [x] HashMaps
-* [ ] Stacks
-* [ ] Queues and Ringbuffer 
+* [x] Stacks
+* [x] Queues and Ringbuffer 
 * [x] Binary Search Trees 
 * [ ] Ternary Search Trees
 * [ ] Graphs 
