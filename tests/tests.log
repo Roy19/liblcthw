@@ -41,6 +41,10 @@ RUNNING: ./tests/radixmap_test
 ALL TESTS PASSED
 Tests run: 1
 ----
+RUNNING: ./tests/ringbuffer_test
+ALL TESTS PASSED
+Tests run: 3
+----
 RUNNING: ./tests/stack_test
 ALL TESTS PASSED
 Tests run: 3
