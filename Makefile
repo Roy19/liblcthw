@@ -5,6 +5,8 @@ PREFIX?=/usr/local
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
+PROGRAM_SRC=$(wildcard bin/*.c)
+PROGRAMS=$(patsubst %.c,%,$(PROGRAM_SRC))
 
 TEST_SRC=$(wildcard tests/*_test.c)
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
@@ -13,7 +15,7 @@ TARGET=build/liblcthw.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET)) 
 
 # The Target Build
-all: $(TARGET) $(SO_TARGET) tests
+all: $(TARGET) $(SO_TARGET) tests $(PROGRAMS)
 
 dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
 dev: all
@@ -31,6 +33,8 @@ $(SO_TARGET): CFLAGS += -shared -o
 $(SO_TARGET): $(OBJECTS)
 	gcc $(CFLAGS) $@ $(OBJECTS)
 
+$(PROGRAMS): LDLIBS += $(TARGET)
+
 # The Unit Tests
 .PHONY: tests
 tests: LDLIBS += $(TARGET)
@@ -42,7 +46,7 @@ valgrind:
 
 # The Cleaner
 clean:
-	rm -rf build $(OBJECTS) $(TESTS)
+	rm -rf build $(OBJECTS) $(TESTS) $(PROGRAMS)
 	rm -f tests/tests.log 
 	find . -name "*.gc*" -exec rm {} \;
 	rm -rf `find . -name "*.dSYM" -print`
