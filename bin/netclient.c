@@ -15,53 +15,59 @@
 struct tagbstring NL = bsStatic("\n");
 struct tagbstring CRLF = bsStatic("\r\n");
 
+// Sets up the socket file descriptor for Nonblocking I/O
 int nonblock(int fd){
-    int flags = fcntl(fd, F_GETFL, 0);
+    int flags = fcntl(fd, F_GETFL, 0);	// Get the flags
     check(flags >= 0, "Invalid flags on nonblock.");
 
-    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-    check(rc == 0, "Can't set nonblocking.");
+    int rc = fcntl(fd, F_SETFL, flags | O_NONBLOCK);	// Use those flags and also set it
+    check(rc == 0, "Can't set nonblocking.");		// for Nonblocking I/O
 
     return 0;
 error:
     return -1;
 }
 
+// Establish a new connection to the client specified by host:port
 int client_connect(char *host, char *port){
     int rc = 0;
     struct addrinfo *addr = NULL;
 
-    rc = getaddrinfo(host, port, NULL, &addr);
+    rc = getaddrinfo(host, port, NULL, &addr);		// Get an addrinfo structure to connect() to		
     check(rc == 0, "Failed to lookup %s:%s", host, port);
 
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    check(sock >= 0, "Cannot create a socket.");
+    int sock = socket(AF_INET, SOCK_STREAM, 0);		// Create a new socket for connecting to the  
+    check(sock >= 0, "Cannot create a socket.");	// Internet using TCP
 
-    rc = connect(sock, addr->ai_addr, addr->ai_addrlen);
-    check(rc == 0, "Connect failed.");
+    rc = connect(sock, addr->ai_addr, addr->ai_addrlen);	// Connect to that socket with the specified
+    check(rc == 0, "Connect failed.");				// addrinfo structure
 
-    rc = nonblock(sock);
+    rc = nonblock(sock);				// Set Nonblocking on socket file descriptor
     check(rc == 0, "Can't set nonblocking.");
 
     freeaddrinfo(addr);
     return sock;
 
 error:
-    freeaddrinfo(addr);
+    if(addr)
+	    freeaddrinfo(addr);
+    
     return -1;
 }
 
+// Read recieved data into the RingBuffer "buffer"
 int read_some(RingBuffer * buffer, int fd, int is_socket){
     int rc = 0;
 
     if (RingBuffer_available_data(buffer) == 0) {
+	    // BUG : use an interface here
         buffer->start = buffer->end = 0;
     }
 
-    if (is_socket) {
+    if (is_socket) {	// If it's a socket use recv() to read into the RingBuffer 
         rc = recv(fd, RingBuffer_starts_at(buffer),
                 RingBuffer_available_space(buffer), 0);
-    } else {
+    } else {		// else use read(). But here it's basically the same.
         rc = read(fd, RingBuffer_starts_at(buffer),
                 RingBuffer_available_space(buffer));
     }
@@ -76,15 +82,16 @@ error:
     return -1;
 }
 
+// Write data from the RingBuffer to a bstring
 int write_some(RingBuffer * buffer, int fd, int is_socket){
     int rc = 0;
     bstring data = RingBuffer_get_all(buffer);
 
     check(data != NULL, "Failed to get from the buffer.");
-    check(bfindreplace(data, &NL, &CRLF, 0) == BSTR_OK,
+    check(bfindreplace(data, &NL, &CRLF, 0) == BSTR_OK,		// Not much essential
             "Failed to replace NL.");
 
-    if (is_socket) {
+    if (is_socket) {	// Same case as read_some
         rc = send(fd, bdata(data), blength(data), 0);
     } else {
         rc = write(fd, bdata(data), blength(data));
@@ -143,6 +150,7 @@ int main(int argc, char *argv[]){
             check_debug(rc != -1, "Failed to write to socket.");
         }
     }
+    // BUG: didn't free the RingBuffer. Possible memory leak.
 
     return 0;
 
