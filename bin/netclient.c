@@ -82,7 +82,7 @@ error:
     return -1;
 }
 
-// Write data from the RingBuffer to a bstring
+// Write data from the RingBuffer to a file descriptor fd
 int write_some(RingBuffer * buffer, int fd, int is_socket){
     int rc = 0;
     bstring data = RingBuffer_get_all(buffer);
@@ -113,8 +113,8 @@ int main(int argc, char *argv[]){
 
     int socket = 0;
     int rc = 0;
-    RingBuffer *in_rb = RingBuffer_create(1024 * 10);
-    RingBuffer *sock_rb = RingBuffer_create(1024 * 10);
+    RingBuffer *in_rb = RingBuffer_create(1024 * 10);		// Used for input from stdin
+    RingBuffer *sock_rb = RingBuffer_create(1024 * 10);		// Used for input from socket
 
     check(argc == 3, "USAGE: netclient host port");
 
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]){
         }
 
         if (FD_ISSET(socket, &readmask)) {
-            rc = read_some(sock_rb, socket, 0);
+            rc = read_some(sock_rb, socket, 1);
             check_debug(rc != -1, "Failed to read from socket.");
         }
 
@@ -150,10 +150,12 @@ int main(int argc, char *argv[]){
             check_debug(rc != -1, "Failed to write to socket.");
         }
     }
-    // BUG: didn't free the RingBuffer. Possible memory leak.
 
     return 0;
 
 error:
+    if(in_rb)	RingBuffer_destroy(in_rb);
+    if(sock_rb) RingBuffer_destroy(sock_rb);
+    
     return -1;
 }
