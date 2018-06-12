@@ -9,7 +9,7 @@ Not yet complete.
 * [x] Stacks
 * [x] Queues and Ringbuffer 
 * [x] Binary Search Trees 
-* [ ] Ternary Search Trees
+* [x] Ternary Search Trees
 * [ ] Graphs 
 
 ### Algorithms supported:
