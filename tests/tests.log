@@ -56,3 +56,7 @@ Tests run: 2
 RUNNING: ./tests/string_algos_test
 ALL TESTS PASSED
 Tests run: 2
+----
+RUNNING: ./tests/tstree_test
+ALL TESTS PASSED
+Tests run: 5
