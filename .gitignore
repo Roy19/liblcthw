@@ -1,6 +1,7 @@
 .vscode/
 build/
 bin/netclient
+bin/urlor
 src/*.o
 tests/*_test
 tests/tests.log
