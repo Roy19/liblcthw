@@ -33,7 +33,7 @@ int client_connect(char *host, char *port){
     int rc = 0;
     struct addrinfo *addr = NULL;
 
-    rc = getaddrinfo(host, port, NULL, &addr);		// Get an addrinfo structure to connect() to		
+    rc = getaddrinfo(host, port, NULL, &addr);		// Do a domain/service lookup for that server		
     check(rc == 0, "Failed to lookup %s:%s", host, port);
 
     int sock = socket(AF_INET, SOCK_STREAM, 0);		// Create a new socket for connecting to the  
@@ -45,7 +45,7 @@ int client_connect(char *host, char *port){
     rc = nonblock(sock);				// Set Nonblocking on socket file descriptor
     check(rc == 0, "Can't set nonblocking.");
 
-    freeaddrinfo(addr);
+    freeaddrinfo(addr);					// free the addr linked list
     return sock;
 
 error:
