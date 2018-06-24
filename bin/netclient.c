@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <sys/select.h>
 #include <stdio.h>
-#include <ringbuffer.h>
-#include <dbg.h>
+#include <lcthw/ringbuffer.h>
+#include <lcthw/dbg.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/uio.h>

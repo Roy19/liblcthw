@@ -1,5 +1,5 @@
-#include <tstree.h>
-#include <bstrlib.h>
+#include <lcthw/tstree.h>
+#include <lcthw/bstrlib.h>
 
 struct tagbstring quit = bsStatic("quit");
 
