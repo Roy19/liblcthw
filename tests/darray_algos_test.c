@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <darray_algos.h>
+#include <lcthw/darray_algos.h>
 #include <string.h>
 
 char *words[] = {"asdfasfd","werwar","13234","xyz","oioj"};	// test words for DArray

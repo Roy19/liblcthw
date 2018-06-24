@@ -1,7 +1,7 @@
 #include "minunit.h"
-#include <bstree.h>
+#include <lcthw/bstree.h>
 #include <assert.h>
-#include <bstrlib.h>
+#include <lcthw/bstrlib.h>
 #include <stdlib.h>
 #include <time.h>
 

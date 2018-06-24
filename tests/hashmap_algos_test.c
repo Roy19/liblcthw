@@ -1,7 +1,7 @@
-#include <bstrlib.h>
-#include <hashmap.h>
-#include <hashmap_algos.h>
-#include <darray.h>
+#include <lcthw/bstrlib.h>
+#include <lcthw/hashmap.h>
+#include <lcthw/hashmap_algos.h>
+#include <lcthw/darray.h>
 #include "minunit.h"
 
 struct tagbstring test1 = bsStatic("test data 1");

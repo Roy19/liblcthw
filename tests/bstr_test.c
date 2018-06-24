@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <bstrlib.h>
+#include <lcthw/bstrlib.h>
 #include <string.h>
 #include <stdio.h>
 

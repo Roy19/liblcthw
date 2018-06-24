@@ -1,7 +1,7 @@
 #include "minunit.h"
-#include <hashmap.h>
+#include <lcthw/hashmap.h>
 #include <assert.h>
-#include <bstrlib.h>
+#include <lcthw/bstrlib.h>
 
 Hashmap *map = NULL;
 static int traverse_called = 0;

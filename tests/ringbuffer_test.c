@@ -1,6 +1,6 @@
 #include "minunit.h"
-#include <bstrlib.h>
-#include <ringbuffer.h>
+#include <lcthw/bstrlib.h>
+#include <lcthw/ringbuffer.h>
 
 struct tagbstring test1 = bsStatic("test1");
 struct tagbstring test2 = bsStatic("test2");

@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <darray.h>
+#include <lcthw/darray.h>
 
 static DArray *array = NULL;
 static int *val1 = NULL;

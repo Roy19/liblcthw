@@ -1,6 +1,6 @@
 #include "minunit.h"
-#include <string_algos.h>
-#include <bstrlib.h>
+#include <lcthw/string_algos.h>
+#include <lcthw/bstrlib.h>
 #include <time.h>
 
 struct tagbstring IN_STR = bsStatic(

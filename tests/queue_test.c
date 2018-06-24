@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <queue.h>
+#include <lcthw/queue.h>
 #include <assert.h>
 
 static Queue *queue = NULL;
