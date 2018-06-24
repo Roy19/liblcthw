@@ -1,8 +1,9 @@
 .vscode/
 build/
 bin/netclient
+bin/server
 bin/urlor
-src/*.o
+src/lcthw/*.o
 tests/*_test
 tests/tests.log
 tags
