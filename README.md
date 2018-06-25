@@ -10,7 +10,6 @@ Not yet complete.
 * [x] Queues and Ringbuffer 
 * [x] Binary Search Trees 
 * [x] Ternary Search Trees
-* [ ] Graphs 
 
 ### Algorithms supported:
 * [x] Sorts on Doubly Linked List.
